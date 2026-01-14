@@ -28,7 +28,7 @@ jobs:
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-android -c Release -o ./output/android
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: ./output/android/*.apk
@@ -54,7 +54,7 @@ jobs:
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
           path: ./output/ios/*.ipa
