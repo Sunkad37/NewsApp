@@ -8,7 +8,7 @@ on:
 
 jobs:
   android:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest   # 👈 must be macOS or Windows, not Ubuntu
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,8 +18,8 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Install MAUI workload
-        run: dotnet workload install maui
+      - name: Install Android workload
+        run: dotnet workload install maui-android
 
       - name: Restore dependencies
         run: dotnet restore NewsApp/NewsApp.csproj
@@ -28,13 +28,13 @@ jobs:
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-android -c Release -o ./output/android
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v4   # 👈 updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: ./output/android/*.apk
 
   ios:
-    runs-on: macos-latest
+    runs-on: macos-latest   # 👈 iOS builds require macOS
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,8 +44,8 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Install MAUI workload
-        run: dotnet workload install maui
+      - name: Install iOS workload
+        run: dotnet workload install maui-ios
 
       - name: Restore dependencies
         run: dotnet restore NewsApp/NewsApp.csproj
@@ -54,7 +54,7 @@ jobs:
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4   # 👈 updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
           path: ./output/ios/*.ipa
