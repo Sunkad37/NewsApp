@@ -16,19 +16,19 @@ jobs:
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.x   # 👈 use .NET 9
+          dotnet-version: 9.0.x
 
       - name: Install MAUI workload
         run: dotnet workload install maui
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore NewsApp/NewsApp.csproj
 
       - name: Build Android APK
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-android -c Release -o ./output/android
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4   # 👈 updated to v4
         with:
           name: android-apk
           path: ./output/android/*.apk
@@ -42,19 +42,19 @@ jobs:
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.x   # 👈 use .NET 9
+          dotnet-version: 9.0.x
 
       - name: Install MAUI workload
         run: dotnet workload install maui
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore NewsApp/NewsApp.csproj
 
       - name: Build iOS IPA
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4   # 👈 updated to v4
         with:
           name: ios-ipa
           path: ./output/ios/*.ipa
