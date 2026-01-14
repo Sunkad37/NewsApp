@@ -1,4 +1,4 @@
-name: Build MAUI App
+name: Build MAUI Android App
 
 on:
   push:
@@ -33,28 +33,3 @@ jobs:
           name: android-apk
           path: ./output/android/*.apk
 
-  ios:
-    runs-on: macos-latest   # 👈 iOS builds require macOS
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup .NET 9
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 9.0.x
-
-      - name: Install iOS workload
-        run: dotnet workload install maui-ios
-
-      - name: Restore dependencies (iOS only)
-        run: dotnet restore NewsApp/NewsApp.csproj -p:TargetFramework=net9.0-ios
-
-      - name: Build iOS IPA
-        run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
-
-      - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-ipa
-          path: ./output/ios/*.ipa
