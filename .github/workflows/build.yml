@@ -1,0 +1,60 @@
+name: Build MAUI App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x   # 👈 use .NET 9
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build Android APK
+        run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-android -c Release -o ./output/android
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-apk
+          path: ./output/android/*.apk
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x   # 👈 use .NET 9
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build iOS IPA
+        run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-ipa
+          path: ./output/ios/*.ipa
