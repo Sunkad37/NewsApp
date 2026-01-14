@@ -21,8 +21,8 @@ jobs:
       - name: Install Android workload
         run: dotnet workload install maui-android
 
-      - name: Restore dependencies
-        run: dotnet restore NewsApp/NewsApp.csproj
+      - name: Restore dependencies (Android only)
+        run: dotnet restore NewsApp/NewsApp.csproj -p:TargetFramework=net9.0-android
 
       - name: Build Android APK
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-android -c Release -o ./output/android
@@ -47,8 +47,8 @@ jobs:
       - name: Install iOS workload
         run: dotnet workload install maui-ios
 
-      - name: Restore dependencies
-        run: dotnet restore NewsApp/NewsApp.csproj
+      - name: Restore dependencies (iOS only)
+        run: dotnet restore NewsApp/NewsApp.csproj -p:TargetFramework=net9.0-ios
 
       - name: Build iOS IPA
         run: dotnet publish NewsApp/NewsApp.csproj -f net9.0-ios -c Release -o ./output/ios
