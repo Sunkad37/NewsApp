@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Pages.DetailsPage">
+
+    <!-- Share button with image -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share"
+                     Order="Primary" 
+                     Priority="0"
+                     Clicked="ShareItem_OnClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <VerticalStackLayout Margin="20" Spacing="15">
+            <!-- News Image -->
+            <Image x:Name="imgNews"
+                   Aspect="AspectFill"
+                   HeightRequest="220"
+                   Margin="0,0,0,10" />
+
+            <!-- Title -->
+            <Label x:Name="lblNewsTitle"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   TextDecorations="Strikethrough"
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,5" />
+            <!-- Description -->
+            <Label x:Name="lblNewsDescrption"
+                   FontSize="20"
+                   FontAttributes="Italic"
+                   TextColor="DarkSlateBlue"
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,10" />
+            <!-- Content -->
+            <Label x:Name="lblContent"
+                   FontSize="16"
+                   TextColor="DimGray"
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,10" />
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

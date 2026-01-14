@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Pages.NewsPage">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <!-- Header -->
+        <Label Text="News 24/7"
+               TextColor="Red"
+               FontAttributes="Bold"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Categories -->
+        <CollectionView x:Name="CvCategory"  
+                        ItemsSource="{Binding NewsCategory}"
+                        HeightRequest="50"
+                        HorizontalScrollBarVisibility="Never"
+                        SelectionMode="Single"
+                        SelectionChanged="SelectableItemsViewCat_OnSelectionChanged">
+
+            <CollectionView.ItemsLayout>
+                <!-- Horizontal list with spacing -->
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding}"
+                           FontSize="16"
+                           TextColor="MediumPurple"
+                           FontAttributes="Bold"
+                           Padding="10"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Articles list -->
+        <CollectionView x:Name="CvArticle" ItemsSource="{Binding ArticlesList}"
+                        VerticalOptions="FillAndExpand"
+                        HeightRequest="600"
+                        SelectionMode="Single"
+                        SelectionChanged="SelectableItemsView_OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10" Spacing="10">
+                        <Image Source="{Binding Image}"
+                               Aspect="AspectFill"
+                               HeightRequest="200" />
+                        <Label Text="{Binding Title}"
+                               FontSize="Medium"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
